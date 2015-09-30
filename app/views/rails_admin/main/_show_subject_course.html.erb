@@ -55,7 +55,7 @@
   <%= pluralize @course_subjects.count,
     t("admin.actions.show_course_subject.subject") %>
 <% else %>
-  <%= t "admin.actions.show_member.no_subject" %>
+  <%= t "admin.actions.show_course_subject.no_subject" %>
 <% end %>
 
 <% unless @object.finish? %>

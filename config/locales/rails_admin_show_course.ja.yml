@@ -8,6 +8,8 @@ ja:
       show_course_subject:
         title: "件名"
         menu: "ショー"
+        no_subject: "このコースには被験者はありません"
+        subject: "主題"
         breadcrumb: "件名"
         start: "スタート"
         finished: "フィニッシュ"
@@ -16,6 +18,7 @@ ja:
         subject_name: "件名の名前"
         action: "アクション"
       show_member:
+        no_member: "このコースにはメンバーがありません"
         title: "ショー"
       remove_member:
         title: "コースからメンバーを削除する"

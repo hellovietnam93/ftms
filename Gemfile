@@ -47,4 +47,11 @@ group :development, :test do
   gem "faker", "1.4.2"
   gem "i18n-tasks", "~> 0.8.7"
   gem "rspec-rails", "~> 3.0"
+
+  gem "capistrano",         require: false
+  gem "capistrano-rvm",     require: false
+  gem "capistrano-rails",   require: false
+  gem "capistrano-bundler", require: false
+  gem "capistrano3-puma",   require: false
 end
+

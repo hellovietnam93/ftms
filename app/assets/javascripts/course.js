@@ -23,5 +23,18 @@ $(document).on("turbolinks:load", function() {
 
     $("#course-tbl_wrapper .select_filter").removeClass("form-control");
   }
+  var input_start_date = $('#course_start_date');
+  if (input_start_date.length > 0) {
+    input_start_date.change(function() {
+      var start_date = new Date(input_start_date.val());
+      start_date.setDate(start_date.getDate() + 60);
+      var dd = start_date.getDate();
+      var mm = start_date.getMonth() + 1;
+      var yyyy = start_date.getFullYear();
+      var end_date = yyyy + '/'+ mm + '/'+ dd;
+      console.log(end_date);
+      $('#course_end_date').val(end_date);
+    });
+  }
 
 });

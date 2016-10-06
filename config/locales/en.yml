@@ -12,6 +12,7 @@ en:
     leader: "Must has one leader"
     wrong_end_date: "Must be greater than start date"
     not_authorize: "You are not authorized to access this page."
+    wrong_format: "must have format dd/mm/yyyy"
   staticpages:
     framgia: "Framgia Trainning Management System"
     profile: "Profile"

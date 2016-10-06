@@ -18,8 +18,6 @@ class Course < ApplicationRecord
 
   validate :check_end_date, on: [:create, :update]
   validates :name, presence: true
-  validates :start_date, presence: true
-  validates :end_date, presence: true
   validates :programming_language_id, presence: true
 
   has_many :course_subjects, dependent: :destroy
@@ -53,9 +51,20 @@ class Course < ApplicationRecord
   end
 
   def check_end_date
-    unless start_date.nil?
-      errors.add :end_date, I18n.t("error.wrong_end_date") if
-        end_date < start_date
+    if start_date.present?
+      if end_date.present?
+        errors.add :end_date, I18n.t("error.wrong_end_date") if
+          end_date < start_date
+      else
+        self.end_date = Settings.working_days.business_days.after start_date
+      end
+    else
+      if end_date.present?
+        errors.add :start_date, I18n.t("error.wrong_end_date")
+      else
+        self.start_date = Time.zone.now
+        self.end_date = Settings.working_days.business_days.after start_date
+      end
     end
   end
 

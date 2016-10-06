@@ -4,10 +4,13 @@
       <div class="modal-body">
         <div class="errors"></div>
         <div class="form-group">
-          <%= f.label :name, class:"control-label" %>
+          <%= f.label :name %>
           <%= f.text_field :name, class: "form-control", required: true,
             placeholder: t("quick_form.#{object.class.name.downcase}") %>
+        </div>
+        <div class="form-group">
           <% if object.class.to_s == Location.name %>
+            <%= f.label :manager %>
             <%= f.select :user_id, managers.collect{|u| [u.name, u.id]}, {},
               {selected: f.object.user_id, class: "form-control"} %>
           <% end %>

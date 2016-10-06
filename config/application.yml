@@ -95,6 +95,7 @@ defaults: &defaults
     min: 0.0
     max: 5.0
     step: 0.5
+  working_days: 44
 development:
   <<: *defaults
   neat_setting: 800

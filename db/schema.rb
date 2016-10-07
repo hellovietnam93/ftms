@@ -425,11 +425,11 @@ ActiveRecord::Schema.define(version: 20161010064432) do
   end
 
   create_table "user_task_histories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "status"
+    t.integer  "status",       default: 0
     t.datetime "deleted_at"
     t.integer  "user_task_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.index ["deleted_at"], name: "index_user_task_histories_on_deleted_at", using: :btree
     t.index ["user_task_id"], name: "index_user_task_histories_on_user_task_id", using: :btree
   end

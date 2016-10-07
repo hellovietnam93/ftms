@@ -205,4 +205,8 @@ module ApplicationHelper
   def footer_not_show controller_name
     controller_name == "sessions" || controller_name == "passwords"
   end
+
+  def load_user_roles user
+    Role.joins(:users).where users: {id: user.id}
+  end
 end

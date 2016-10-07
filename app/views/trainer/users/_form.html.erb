@@ -13,10 +13,16 @@
         </div>
         <div class="form-group">
           <%= f.label :role_id %>
-          <span class="label label-default">
-            <%= f.label :role_id do %>
-              <%= f.check_box :role_id, {checked: true, disabled: "disabled"} %> &nbsp;
-              <%= t "user.type.trainee" %> &nbsp;
+          <span>
+            <%= f.collection_check_boxes :role_ids, load_user_roles(@user), :id,
+              :name do |role| %>
+              <span class="label label-default">
+                <%= role.label do %>
+                  <%= role.check_box id: "check_role_#{role.object.role_type}",
+                    disabled: true, checked: true %> &nbsp;
+                  <%= role.text %> &nbsp;
+                <% end %>
+              </span>
             <% end %>
           </span>
         </div>

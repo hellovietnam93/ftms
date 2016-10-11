@@ -96,6 +96,10 @@ defaults: &defaults
     max: 5.0
     step: 0.5
   working_days: 44
+  status:
+    init: "init"
+    finished: "finished"
+    continue: "continue"
 development:
   <<: *defaults
   neat_setting: 800

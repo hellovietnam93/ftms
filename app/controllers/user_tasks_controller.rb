@@ -2,16 +2,27 @@ class UserTasksController < ApplicationController
   load_and_authorize_resource
 
   def update
+    new_status = params[:status]
     @old_status = @user_task.status
-    if @user_task.update_attributes status: UserTask.statuses[:finished]
-      track_activity
-      task_statistic
-      flash.now[:success] = flash_message "updated"
-      load_chart_data
+    user_task_service = UserTaskService.new user_task: @user_task,
+      status: new_status
+    if new_status == Settings.status.finished
+      @user_task_history = user_task_service.perform
+      if @user_task.update_attributes status: Settings.status.finished
+        flash.now[:success] = flash_message "updated"
+      else
+        flash.now[:error] = flash_message "not_updated"
+      end
     else
-      flash.now[:error] = flash_message "not_updated"
+      if user_task_service.perform
+        flash.now[:success] = flash_message "updated"
+      else
+        flash.now[:error] = flash_message "not_updated"
+      end
     end
-
+    track_activity
+    task_statistic
+    load_chart_data
     respond_to do |format|
       format.js
     end

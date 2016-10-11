@@ -1,6 +1,6 @@
 module UsersMailerHelper
 
-  def load_user_tasks course_id
-    UserTask.user_finished_task_in_day course_id
+  def load_user_task_histories course_id
+    UserTaskHistory.all_user_task_history course_id
   end
 end

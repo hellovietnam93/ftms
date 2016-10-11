@@ -60,6 +60,8 @@ en:
   messages:
     delete:
       confirm: "Are you sure?"
+    continue:
+      confirm: "Will you start do this task now?"
   flashs:
     user:
       mustlogin: "You need to login to access!"
@@ -188,6 +190,7 @@ en:
     cancel: "Cancel"
     close: "Close"
     show: "Show"
+    continue: "Continue"
   buttons:
     edit: Edit
   evaluations:
@@ -303,6 +306,10 @@ en:
       subject: "Subject"
       task_finish: "Finish Task"
       progress: "Progress"
+      task_continue: "Continue Task"
+      continue_task: "- %{task_name}"
+      task_init: "Init Task"
+      init_task: "- %{task_name}"
   user_subjects:
     init: "Init"
     in_progress: "In progress"

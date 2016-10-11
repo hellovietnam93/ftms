@@ -46,7 +46,7 @@
     font-size: 14px;
   }
 
-  .btn-action, .btn-finish {
+  .btn-action, .btn-finished, .btn-continued, .btn-finish {
     font-size: 12px;
     line-height: 3;
     padding: 0 2em;
@@ -60,7 +60,7 @@
     color: #21abc7;
   }
 
-  .btn-finish {
+  .btn-finish, .btn-continue, .btn-finished, .btn-continued {
     border: 1px solid rgba(255, 153, 0, 0.9);
     color: rgba(255, 153, 0, 0.9);
   }
@@ -71,7 +71,7 @@
     color: #fff;
   }
 
-  .btn-finish:hover {
+  .btn-finish:hover, .btn-finished:hover, .btn-continued:hover {
     background-color: rgba(255, 153, 0, 0.9);
     border-color: rgba(255, 153, 0, 0.9);
     color: #fff;
@@ -87,8 +87,14 @@
     background-color: #eaeaea;
   }
 
-  .btn-finish-task {
+  .btn-finish-task, .btn-continue-task {
     margin-top: 25px;
+    margin-right: 5px;
+    width: 100px;
+  }
+
+  .action-status {
+    display: inline-flex;
   }
 }
 

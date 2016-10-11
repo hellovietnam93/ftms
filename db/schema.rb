@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160930072715) do
+ActiveRecord::Schema.define(version: 20161010064432) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "trackable_type"
@@ -424,6 +424,16 @@ ActiveRecord::Schema.define(version: 20160930072715) do
     t.index ["user_id"], name: "index_user_subjects_on_user_id", using: :btree
   end
 
+  create_table "user_task_histories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "status"
+    t.datetime "deleted_at"
+    t.integer  "user_task_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["deleted_at"], name: "index_user_task_histories_on_deleted_at", using: :btree
+    t.index ["user_task_id"], name: "index_user_task_histories_on_user_task_id", using: :btree
+  end
+
   create_table "user_tasks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "task_id"
     t.integer  "user_subject_id"
@@ -493,6 +503,7 @@ ActiveRecord::Schema.define(version: 20160930072715) do
   add_foreign_key "user_subjects", "courses"
   add_foreign_key "user_subjects", "user_courses"
   add_foreign_key "user_subjects", "users"
+  add_foreign_key "user_task_histories", "user_tasks"
   add_foreign_key "user_tasks", "tasks", on_delete: :cascade
   add_foreign_key "user_tasks", "user_subjects", on_delete: :cascade
   add_foreign_key "user_tasks", "users"

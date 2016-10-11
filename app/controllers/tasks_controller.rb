@@ -6,6 +6,10 @@ class TasksController < ApplicationController
 
   def create
     if @task.save
+      user_task = @task.user_tasks.find_by user: current_user
+      user_task_service = UserTaskService.new user_task: user_task,
+        status: Settings.status.init
+      @user_task_history = user_task_service.perform
       flash[:success] = flash_message "created"
     else
       flash[:failed] = flash_message "not_created"

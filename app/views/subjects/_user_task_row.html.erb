@@ -1,7 +1,7 @@
 <div class="col-md-1 td-image col-xs-1" title="<%= t "user_tasks.statuses.#{user_task.status}" %>">
   <%= image_tag "#{user_task.status}.png", size: Settings.image_size_40 %>
 </div>
-<div class="col-md-9 col-xs-9">
+<div class="col-md-8 col-xs-8">
   <div class="task-name">
     <%= user_task.task_name %>
   </div>
@@ -9,16 +9,23 @@
     <%= user_task.task_description %>
   </div>
 </div>
-<div class="col-md-2 col-xs-2">
+<div class="col-md-3 col-xs-3">
   <% if current_user?(user_task.user) && user_task.subject_in_progress? &&
     !user_task.finished? %>
-    <div class="action" hidden>
+    <div class="action text-center" hidden>
       <% if user_task.in_progress? %>
-        <div>
-          <%= link_to t("button.finish"), user_task_path(user_task),
+        <div class="action-status">
+          <%= link_to t("button.continue"), user_task_path(user_task,
+            status: "continue"),
+            method: :patch, remote: true,
+            data: {confirm: t("messages.continue.confirm")},
+            class: "btn btn-finished btn-continue-task" %>
+
+          <%= link_to t("button.finish"), user_task_path(user_task,
+            status: "finished"),
             method: :patch,
-            remote: true, data:{confirm: t("messages.delete.confirm")},
-            class: "btn btn-finish btn-finish-task" %>
+            remote: true, data: {confirm: t("messages.delete.confirm")},
+            class: "btn btn-continued btn-finish-task" %>
         </div>
       <% end %>
       <% if user_task.nil_master? %>
@@ -27,7 +34,7 @@
           title: t("subjects.task.update") %> |
 
         <%= link_to t("button.delete"), user_task.task, method: :delete,
-          data:{confirm: t("messages.delete.confirm")} %>
+          data: {confirm: t("messages.delete.confirm")} %>
       <% end %>
     </div>
   <% end %>

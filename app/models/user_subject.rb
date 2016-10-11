@@ -29,7 +29,7 @@ class UserSubject < ApplicationRecord
   accepts_nested_attributes_for :user_tasks
 
   delegate :name, to: :user, prefix: true, allow_nil: true
-  delegate :name, :description, to: :subject, prefix: true, allow_nil: true
+  delegate :name, :id, :description, to: :subject, prefix: true, allow_nil: true
   delegate :name, to: :course, prefix: true, allow_nil: true
 
   enum status: [:init, :progress, :finish, :waiting]

@@ -5,7 +5,7 @@ class Course < ApplicationRecord
   include InitUserSubject
   mount_uploader :image, ImageUploader
 
-  USER_COURSE_ATTRIBUTES_PARAMS = [user_courses_attributes: [:id, :user_id, :_destroy]]
+  USER_COURSE_ATTRIBUTES_PARAMS = [user_courses_attributes: [:id, :user_id, :_destroy, :deleted_at]]
   COURSE_ATTRIBUTES_PARAMS = [:name, :image, :description,
     :programming_language_id, :location_id,
     :start_date, :end_date, documents_attributes:
@@ -21,7 +21,7 @@ class Course < ApplicationRecord
   validates :programming_language_id, presence: true
 
   has_many :course_subjects, dependent: :destroy
-  has_many :user_courses, dependent: :destroy
+  has_many :user_courses, -> {with_deleted}, dependent: :destroy
   has_many :user_subjects, dependent: :destroy
   has_many :users, through: :user_courses
   has_many :subjects, through: :course_subjects

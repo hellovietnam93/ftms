@@ -4,6 +4,7 @@ class UserCourse < ApplicationRecord
   acts_as_paranoid
 
   after_create :create_user_subjects_when_assign_new_user
+  before_save :restore_data
 
   belongs_to :user
   belongs_to :course
@@ -30,6 +31,12 @@ class UserCourse < ApplicationRecord
   def create_user_subjects_when_assign_new_user
     if user.is_trainee?
       create_user_subjects [self], course.course_subjects, course_id
+    end
+  end
+
+  def restore_data
+    if deleted_at_changed?
+      restore recursive: true
     end
   end
 end

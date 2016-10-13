@@ -3,7 +3,7 @@ class Trainer::AssignTrainersController < ApplicationController
   before_action :find_course
 
   def edit
-    @trainers = Role.includes(:users, :user_roles).find_by(name: "trainer").users
+   @supports = Supports::Course.new @course
 
     add_breadcrumb_path "courses"
     add_breadcrumb @course.name, trainer_course_path(@course)

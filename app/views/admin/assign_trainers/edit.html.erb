@@ -1,7 +1,9 @@
 <div id="trainees">
-  <%= form_for @course, url: admin_course_assign_trainers_path, method: :patch do |f| %>
+  <%= form_for @course, url: admin_course_assign_trainers_path,
+    method: :patch do |f| %>
     <%= render "shared/error_messages", object: @course %>
-    <%= render "shared/form_assign", f: f, users: @trainers, course_users:
-      @course.user_courses.map(&:user)%>
+    <%= render "shared/form_assign", f: f,
+      assigned_user_ids: @supports.assigned_user_ids,
+      user_courses_handler: @supports.trainer_courses_handler %>
   <% end %>
 </div>

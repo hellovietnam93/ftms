@@ -1,6 +1,6 @@
 <table class="table" id="sortable">
   <tbody class="sortable-table">
-    <% @course_subjects.each do |course_subject| %>
+    <% @supports.course_subjects.each do |course_subject| %>
       <tr data-item-id=<%= course_subject.id %>
         data-url=<%= trainer_course_course_subject_path course_subject.course, course_subject %>
         class="item">

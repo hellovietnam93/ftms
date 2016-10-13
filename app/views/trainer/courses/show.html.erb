@@ -89,14 +89,15 @@
 
     <div class="col-md-3 user-info right-side-course">
       <h2 class="label"><%= t "courses.labels.trainer" %>
-        (<%= @trainers.size %>)&nbsp;
+        (<%= @supports.trainers.size %>)&nbsp;
         <%= link_to edit_trainer_course_assign_trainers_path(@course) do %>
           <i class="ionicons ion-android-person-add"></i>
         <% end %>
       </h2>
       <ul>
-        <% @trainers.each do |trainer| %>
-          <%= link_to [:trainer, trainer], title: trainer.name do %>
+        <% @supports.trainers.each do |trainer| %>
+          <%= link_to [:trainer, trainer],
+            title: trainer.name do %>
             <li class="label-user"><%= avatar_user_tag trainer,
               "profile-trainer img-circle", Settings.image_size_50 %>
               <%= trainer.name %>
@@ -105,16 +106,17 @@
         <% end %>
       </ul>
       <h2 class="label"><%= t "courses.labels.trainee" %>
-        (<%= @trainees.size %>)
+        (<%= @supports.trainees.size %>)
         <%= link_to edit_trainer_course_assign_trainees_path(@course) do %>&nbsp;
           <i class="ionicons ion-android-person-add"></i>
         <% end %>
       </h2>
       <ul>
-        <% @trainees.each do |trainee| %>
-          <%= link_to [:trainer, trainee], title: trainee.name do %>
+        <% @supports.trainees.each do |trainee| %>
+          <%= link_to [:trainer, trainee],
+            title: trainee.name do %>
             <li class="label-user"><%= avatar_user_tag trainee,
-              "profile-user img-circle", Settings.image_size_50 %>
+            "profile-user img-circle", Settings.image_size_50 %>
               <%= trainee.name %>
             </li>
           <% end %>

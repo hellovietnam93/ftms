@@ -6,8 +6,7 @@ class User < ApplicationRecord
   QUERY = "users.id NOT IN (SELECT user_id
     FROM user_courses, courses WHERE user_courses.course_id = courses.id
     AND (courses.status = 0 OR courses.status = 1)
-    AND courses.id <> :course_id) AND profiles.programming_language_id =
-    :programming_language_id"
+    AND courses.id <> :course_id)"
 
 
   ATTRIBUTES_PROFILE_PARAMS = [
@@ -51,9 +50,8 @@ class User < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   validates_confirmation_of :password
 
-  scope :available_of_course, ->course_id, programming_language_id{
-    joins(:profile).where(QUERY, course_id: course_id,
-    programming_language_id: programming_language_id)
+  scope :available_of_course, ->course_id{
+    joins(:profile).where QUERY, course_id: course_id
   }
   scope :trainee_roles, ->{joins(user_roles: :role)
     .where("roles.role_type = ?", Role.role_types[:trainee])}
@@ -79,6 +77,8 @@ class User < ApplicationRecord
       .where("user_subjects.status = ?", UserSubject.statuses[:progress])
       .pluck(:id))
   end
+  scope :users_in_course, ->{joins(:user_courses)
+    .where("user_courses.deleted_at": nil).distinct}
 
   before_validation :set_password
 

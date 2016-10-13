@@ -15,8 +15,12 @@
             <div class="checkbox">
               <span><%= f.check_box :remember_me, class: "character-checkbox" %></span>
               <span><%= f.label :remember_me, t("signins.remember"), class: "fixed-label" %></span>
+              <span class="pull-right">
+                <%= link_to t("user.forgot_password"),
+                  new_user_password_path(resource_name) %>
+              </span>
             </div>
-          <% end -%>
+          <% end %>
           <%= f.submit t("user.login"), class: "btn btn-custom btn-lg btn-block" %>
         <% end %>
       </div>

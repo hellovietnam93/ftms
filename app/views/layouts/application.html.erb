@@ -54,7 +54,7 @@
         </div>
         <%= yield %>
       </div>
-      <%= render "layouts/footer" unless controller_name == "sessions" %>
+      <%= render "layouts/footer" unless footer_not_show controller_name %>
     </body>
   <% end %>
   <%= render "shared/feed_back_form" %>

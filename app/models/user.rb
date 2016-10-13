@@ -91,7 +91,8 @@ class User < ApplicationRecord
   delegate :working_day, to: :profile, prefix: true, allow_nil: true
   delegate :graduation, to: :profile, prefix: true, allow_nil: true
 
-  devise :database_authenticatable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :rememberable, :trackable, :validatable,
+    :recoverable
 
   def total_done_tasks user, course
     done_tasks = UserSubject.load_user_subject(user.id, course.id).map(&:user_tasks).flatten.count

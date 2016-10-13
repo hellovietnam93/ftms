@@ -155,7 +155,7 @@ module ApplicationHelper
   end
 
   def class_body name
-    name == "static_pages" || name == "sessions" ?
+    name == "static_pages" || name == "sessions" || name == "passwords" ?
       "body_home" : "container body-wrapper-content"
   end
 
@@ -200,5 +200,9 @@ module ApplicationHelper
 
   def data_finish_task data
     data.blank? || data.values.sum == 0 ? false : true
+  end
+
+  def footer_not_show controller_name
+    controller_name == "sessions" || controller_name == "passwords"
   end
 end

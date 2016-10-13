@@ -11,6 +11,8 @@ en:
       email: "Email"
       password: "Password"
       avatar: "Avatar"
+      new_password: "New password"
+      new_password_confirm: "New password confirm"
     place_holder:
       password_confirmation: "Password Confirmation"
     profile:
@@ -31,6 +33,9 @@ en:
       trainee: "Trainee"
       admin: "Admin"
       trainer: "Trainer"
+    for_got_password: "Forgot your password?"
+    sent_mail_forgot: "Send me reset password instructions"
+    password_change: "Change Password"
   signins:
     banner: "Please Login"
     remember: "Remember me"

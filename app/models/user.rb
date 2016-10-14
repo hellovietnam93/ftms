@@ -47,6 +47,7 @@ class User < ApplicationRecord
   has_many :user_roles, dependent: :destroy
   has_many :roles, through: :user_roles
   has_many :feed_backs, dependent: :destroy
+  has_many :track_logs, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
   validates_confirmation_of :password

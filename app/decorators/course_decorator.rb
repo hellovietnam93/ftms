@@ -48,7 +48,7 @@ class CourseDecorator < Draper::Decorator
           user = user_task_history.user_task.user
           users.delete(user)
           subject = user_task_history.user_task.user_subject.subject
-          "init" = current_status
+          current_status = "init"
           show_html += "</td></tr><tr>
             <td style='border: 1px solid #cecece;'>
               #{I18n.t 'mail.by_day.user_name', user_name: user.name}
@@ -80,12 +80,12 @@ class CourseDecorator < Draper::Decorator
           show_html += "#{I18n.t 'mail.by_day.continue_task',
             task_name: user_task_history.user_task.task_name}<br>"
           if current_status == "init"
-            "continue" = current_status
+            current_status = "continue"
           end
         elsif user_task_history.continue?
           if current_status == "continue"
             show_html += "</td><td style='border: 1px solid #cecece;'>"
-            "finished" = current_status
+            current_status = "finished"
           end
           show_html += "#{I18n.t 'mail.by_day.continue_task',
             task_name: user_task_history.user_task.task_name}<br>"
@@ -96,7 +96,7 @@ class CourseDecorator < Draper::Decorator
           elsif current_status == "finished" || current_status == "continue"
             show_html += "</td><td style='border: 1px solid #cecece;'>"
           end
-          "init" = current_status
+          current_status = "init"
           show_html += "#{I18n.t 'mail.by_day.finish_task',
             task_name: user_task_history.user_task.task_name}<br>"
         end

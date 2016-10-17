@@ -97,7 +97,10 @@ $(document).on("turbolinks:load", function() {
     $("#systems-header").addClass("active");
   }
 
+  if ($(".shedules-active").length > 0) {
+    $("#schedule-header").addClass("active");
+  }
+
   $("#slimScrollDiv").slimScroll();
   $("#slimscroll_admin").slimScroll();
 });
-

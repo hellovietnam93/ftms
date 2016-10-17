@@ -6,6 +6,7 @@ class User < ApplicationRecord
   QUERY = "users.id NOT IN (SELECT user_id
     FROM user_courses, courses WHERE user_courses.course_id = courses.id
     AND (courses.status = 0 OR courses.status = 1)
+    AND user_courses.deleted_at IS NULL
     AND courses.id <> :course_id)"
 
 

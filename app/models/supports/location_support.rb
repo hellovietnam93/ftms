@@ -1,4 +1,4 @@
-class Supports::Location
+class Supports::LocationSupport
   attr_reader :location
 
   def initialize args

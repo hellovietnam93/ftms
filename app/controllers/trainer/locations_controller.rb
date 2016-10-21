@@ -16,7 +16,7 @@ class Trainer::LocationsController < ApplicationController
   end
 
   def show
-    @location_support = Supports::Location.new location: @location
+    @location_support = Supports::LocationSupport.new location: @location
 
     add_breadcrumb_path "locations"
     add_breadcrumb @location.name

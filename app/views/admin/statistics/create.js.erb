@@ -1,0 +1,27 @@
+<% if params[:type] == "trainee_types" %>
+  $('#trainee-types-chart').attr("data-trainee-types", "<%= @statistics.trainee_types %>");
+  $('#trainee-types-chart').highcharts({
+    chart: {
+      plotBackgroundColor: null,
+      plotBorderWidth: null,
+      plotShadow: false,
+      type: 'pie'
+    },
+    title: false,
+    plotOptions: {
+      pie: {
+        allowPointSelect: true,
+        cursor: 'pointer',
+        dataLabels: {
+          enabled: false
+        },
+        showInLegend: true
+      }
+    },
+    series: [{
+      name: 'Brands',
+      colorByPoint: true,
+      data: eval("(" + $('#trainee-types-chart').attr("data-trainee-types").replace(/&gt;/g, ">").replace(/&quot;/g,"\"").replace(/:name=>/g, "name:").replace(/:y=>/g, "y:") + ")")
+    }]
+  });
+<% end %>

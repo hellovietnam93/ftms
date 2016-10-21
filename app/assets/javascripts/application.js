@@ -67,6 +67,7 @@
 //= require admin/subject
 //= require exam
 //= require question
+//= require statistic
 
 $(document).on("turbolinks:load ajaxComplete", function() {
   $(".alert").delay(3000).fadeOut();

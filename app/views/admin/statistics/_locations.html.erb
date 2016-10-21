@@ -1,0 +1,31 @@
+<div id="locations" class="box box-danger">
+  <div class="box-header with-border">
+    <h3 class="box-title">Monthly Recap Report</h3>
+
+    <div class="box-tools pull-right">
+    <div class="btn-group">
+      <button type="button" class="btn btn-box-tool" data-widget="collapse">
+        <i class="fa fa-minus"></i>
+      </button>
+      <button type="button" class="btn btn-box-tool" data-widget="remove">
+        <i class="fa fa-times"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="box-body">
+    <div id="locations-chart"
+      data-locations="<%= @statistics.locations.keys %>"
+      data-trainees="<%= @statistics.locations.values %>">
+    </div>
+  </div>
+
+  <div class="box-footer">
+    <% @statistics.locations.keys.each_with_index do |location, index| %>
+      <div id="location-select-<%= index %>">
+        <i class="fa fa-heart" aria-hidden="true"></i>
+        <span class="location-name"><%= location %></span>
+      </div>
+    <% end %>
+  </div>
+</div>

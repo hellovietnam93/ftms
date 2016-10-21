@@ -1,0 +1,31 @@
+<div id="trainee-types" class="box box-success">
+  <div class="box-header with-border">
+    <h3 class="box-title">Monthly Recap Report</h3>
+
+    <div class="box-tools pull-right">
+      <button type="button" class="btn btn-box-tool" data-widget="collapse">
+        <i class="fa fa-minus"></i>
+      </button>
+      <button type="button" class="btn btn-box-tool" data-widget="remove">
+        <i class="fa fa-times"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="box-body">
+    <div id="trainee-types-chart"
+      data-trainee-types="<%= @statistics.trainee_types %>">
+    </div>
+  </div>
+
+  <div class="box-footer">
+    <%= form_tag admin_statistics_path, remote: true do %>
+      <%= hidden_field_tag :type, "trainee_types" %>
+      <% @locations.each do |location| %>
+        <%= check_box_tag "location_ids[]", location.id, checked: true %>
+        <%= location.name %>
+      <% end %>
+      <%= submit_tag "submit", class: "btn btn-danger" %>
+    <% end %>
+  </div>
+</div>

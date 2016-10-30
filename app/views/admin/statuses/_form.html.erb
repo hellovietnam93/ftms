@@ -1,10 +1,14 @@
 <%= form_for [:admin, @status] do |f| %>
-    <div class="form-group">
-      <%= f.label :name %>
-      <%= f.text_field :name, class: "form-control", required: true %>
-    </div>
-    <div class="form-group pull-right">
-      <%= f.submit (f.object.new_record? ? t("buttons.create")
-        : t("buttons.update")), class: "btn btn-primary" %>
-    </div>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control", required: true %>
+  </div>
+  <div class="form-group">
+    <%= f.label :color %>
+    <%= f.text_field :color, class: "form-control colorpicker" %>
+  </div>
+  <div class="form-group pull-right">
+    <%= f.submit (f.object.new_record? ? t("buttons.create")
+      : t("buttons.update")), class: "btn btn-primary" %>
+  </div>
 <% end %>

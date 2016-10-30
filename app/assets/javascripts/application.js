@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require bootstrap-colorpicker
 //= require jquery_ujs
 //= require turbolinks
 //= require cable
@@ -72,6 +73,7 @@
 $(document).on("turbolinks:load ajaxComplete", function() {
   $(".alert").delay(3000).fadeOut();
   $("#error_explanation").delay(3000).slideUp();
+  $('.colorpicker').colorpicker();
 });
 
 function remove_fields(link) {

@@ -29,7 +29,7 @@ class TrainingManagementPresenter < ActionView::Base
 
   private
   def sidebar_item user, index
-    "<div class=\"trow list_#{index}\" id=\"sidebar-row-#{user.id}\">
+    "<div class=\"trow list_#{index}\" id=\"sidebar-row-#{user.id}\" style=\"background: #{user.profile.status.color if user.profile.status};\">
       <div class=\"tcell stt\">#</div>
       <div class=\"tcell name trainee_name\" title=\"#{user.name}\">
       #{link_to user.name, eval("#{@namespace}_user_path(user)")}
@@ -39,7 +39,7 @@ class TrainingManagementPresenter < ActionView::Base
   end
 
   def body_item user, index
-    html = "<div class=\"trow #{"list_#{index}" }\" id=\"body-row-#{user.id}\">
+    html = "<div class=\"trow #{"list_#{index}" }\" id=\"body-row-#{user.id}\" style=\"background: #{user.profile.status.color if user.profile.status};\">
       <div class=\"tcell trainee_type\" title=\"#{user.profile.user_type_name}\">
         #{user.profile.user_type_name}
       </div>

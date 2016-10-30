@@ -101,6 +101,8 @@ GEM
       rails (>= 3.1)
     bootstrap-sass (3.2.0.0)
       sass (~> 3.2)
+    bootstrap_colorpicker_rails (1.0.2)
+      railties (>= 3.0)
     breadcrumbs_on_rails (2.3.1)
     builder (3.2.2)
     bullet (5.4.0)
@@ -362,6 +364,7 @@ DEPENDENCIES
   bootstrap-datepicker-rails
   bootstrap-kaminari-views
   bootstrap-sass (= 3.2.0.0)
+  bootstrap_colorpicker_rails
   breadcrumbs_on_rails
   bullet
   business_time

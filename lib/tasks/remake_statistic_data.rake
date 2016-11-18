@@ -1,11 +1,15 @@
 namespace :db do
   desc "Add data to table statistics"
-  task make_statistic_data: :environment do
-    puts "Add data to table statistics"
-    ["Resigned", "Joined div", "In education"].each do |name|
-      instance_variable_set("@#{name.downcase.gsub(" ", "_")}", Stage.find_by(name: name))
+  task remake_statistic_data: :environment do
+    puts "Find all stage"
+    Stage.all.each do |stage|
+      instance_variable_set("@#{stage.name.downcase.gsub(" ", "_")}", stage)
     end
 
+    puts "Remove all available statistics"
+    Statistic.delete_all
+
+    puts "Add data to table statistics"
     Profile.includes(:user_type, :programming_language, :location, :stage).each do |profile|
       UserType.all.each do |user_type|
         ProgrammingLanguage.all.each do |programming_language|

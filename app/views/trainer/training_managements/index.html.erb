@@ -18,10 +18,9 @@
       </div>
 
       <div class="pull-right" id="number-records">
-        <%= i18n_pluralize @users.size, Settings.record %>
       </div>
 
-      <div id="filter" data-filter-data="<%= @filter_data_user %>"
+      <div id="filter" data-filter-data="<%= @filter_service.user_filter_data %>"
         data-type="<%= :training_managements %>" data-id="<%= current_user.id %>"
         data-is-turn-on="<%= @filter_service.is_on? %>">
       </div>

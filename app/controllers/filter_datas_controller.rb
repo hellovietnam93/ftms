@@ -112,6 +112,14 @@ class FilterDatasController < ApplicationController
       @key_field = :score
       @value_field = :score
       @resources = Exam.order(:score).pluck(:score).uniq.compact
+    when "staff_code"
+      @key_field = :staff_code
+      @value_field = :staff_code
+      @resources = Profile.order(:staff_code).pluck(:staff_code).uniq.compact
+    when "stage"
+      @key_field = :id
+      @value_field = :stage_name
+      @resources = Stage.order(:name).pluck :name
     end
 
     respond_to do |format|

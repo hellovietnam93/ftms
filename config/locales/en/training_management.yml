@@ -3,6 +3,7 @@ en:
     titles:
       all_trainee: "All trainees"
     headers:
+      staff_code: "UID"
       trainee_name: "Name"
       trainee_type: "Type"
       location: "Place"
@@ -18,5 +19,6 @@ en:
       working_days: "Working days/week"
       trainer: "Trainer"
       progress: "Progress"
+      stage: "Stage"
       note: "Note"
       all_status: "All statuses"

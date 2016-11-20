@@ -2,7 +2,16 @@
   <div class="tbody">
     <div class="trow header">
       <div class="tcell stt">#</div>
-      <div class="tcell name display_name title">
+      <div class="tcell staff_code title">
+        <%= t "training_managements.headers.staff_code" %>
+        <%= link_to filter_datas_path(type: :staff_code, filter_type: :training_managements),
+          remote: true,
+          class: "open-select",
+          data: {name: "f-staff_code"} do %>
+          <i class="fa ic ic-filter staff_code"></i>
+        <% end %>
+      </div>
+      <div class="tcell name title">
         <%= t "training_managements.headers.trainee_name" %>
         <%= link_to filter_datas_path(type: :trainee_name, filter_type: :training_managements),
           remote: true,
@@ -48,6 +57,15 @@
             class: "open-select",
             data: {name: "f-trainee_status"} do %>
             <i class="fa ic ic-filter trainee_status"></i>
+          <% end %>
+        </div>
+        <div class="tcell stage title">
+          <%= t "training_managements.headers.stage" %>
+          <%= link_to filter_datas_path(type: :stage, filter_type: :training_managements),
+            remote: true,
+            class: "open-select",
+            data: {name: "f-stage"} do %>
+            <i class="fa ic ic-filter stage"></i>
           <% end %>
         </div>
         <div class="tcell university title">

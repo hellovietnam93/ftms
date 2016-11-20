@@ -33,8 +33,11 @@ class TrainingManagementPresenter < ActionView::Base
       style=\"background-color:
         #{user.profile.status_color if user.profile.status}\">
       <div class=\"tcell stt\">#</div>
+      <div class=\"tcell staff_code\" title=\"#{user.profile.staff_code}\">
+        #{user.profile.staff_code}
+      </div>
       <div class=\"tcell name trainee_name\" title=\"#{user.name}\">
-      #{link_to user.name, eval("#{@namespace}_user_path(user)")}
+        #{link_to user.name, eval("#{@namespace}_user_path(user)")}
       </div>
     </div>
     "
@@ -51,6 +54,9 @@ class TrainingManagementPresenter < ActionView::Base
       </div>
       <div class=\"tcell trainee_status\" title=\"#{user.profile.status_name}\">
         #{user.profile.status_name}
+      </div>
+      <div class=\"tcell stage\" title=\"#{user.profile.stage_name}\">
+        #{user.profile.stage_name}
       </div>
       <div class=\"tcell university\" title=\"#{user.profile.university_name}\">
         #{user.profile.university_name}
@@ -87,7 +93,7 @@ class TrainingManagementPresenter < ActionView::Base
         #{user.current_progress.name if user.current_progress}
       </div>
       <div class=\"tcell note\">
-        #{user.notes.any? ? user.notes.last.name : ""}
+
       </div>"
     html += "<div class=\"tcell action\">
       #{link_to t("buttons.edit"), eval("edit_#{@namespace}_user_path(user)")}

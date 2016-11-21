@@ -4,6 +4,7 @@ class Course < ApplicationRecord
   include PublicActivity::Model
   include InitUserSubject
   include LoadUser
+  include EstimateTime
   mount_uploader :image, ImageUploader
 
   USER_COURSE_ATTRIBUTES_PARAMS = [user_courses_attributes: [:id, :user_id, :_destroy, :deleted_at]]
@@ -57,14 +58,14 @@ class Course < ApplicationRecord
         errors.add :end_date, I18n.t("error.wrong_end_date") if
           end_date < start_date
       else
-        self.end_date = Settings.working_days.business_days.after start_date
+        end_date = estimate_end_date Settings.working_days
       end
     else
       if end_date.present?
         errors.add :start_date, I18n.t("error.wrong_end_date")
       else
-        self.start_date = Time.zone.now
-        self.end_date = Settings.working_days.business_days.after start_date
+        start_date = Time.zone.now
+        end_date = estimate_end_date Settings.working_days
       end
     end
   end

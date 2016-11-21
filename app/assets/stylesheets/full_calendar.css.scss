@@ -1,15 +1,8 @@
-@mixin box_sizing {
-  border-top-right-radius: 15px;
-  border-top-left-radius: 15px;
-}
-
 #calendar {
   .fc-header {
-    display: inline-block;
     vertical-align: top;
     border: none !important;
   }
-
   max-width: 900px;
   margin: 5px auto;
   padding: auto;
@@ -20,7 +13,11 @@
     background: #5F9EA0;
     color: #fff;
     height: 30px;
-    @include box-sizing;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+  }
+  .fc-day-header .ui-widget-header {
+    border: none;
   }
   margin-bottom: 100px;
 }
@@ -29,7 +26,14 @@
   width: 220px;
   margin: 0 auto;
   min-height: 250px;
-
+  .fc-head-container .ui-widget-header {
+    background: #9FB6CD;
+    color: #fff;
+    text-align: center;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    margin-bottom: 0;
+  }
   .fc-row {
     min-height: 2em !important;
   }

@@ -554,11 +554,12 @@ ActiveRecord::Schema.define(version: 20161120034523) do
   end
 
   create_table "user_task_histories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "status",       default: 0
+    t.integer  "status",           default: 0
     t.datetime "deleted_at"
     t.integer  "user_task_id"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.string   "pull_request_url"
     t.index ["deleted_at"], name: "index_user_task_histories_on_deleted_at", using: :btree
     t.index ["user_task_id"], name: "index_user_task_histories_on_user_task_id", using: :btree
   end
@@ -567,11 +568,12 @@ ActiveRecord::Schema.define(version: 20161120034523) do
     t.integer  "task_id"
     t.integer  "user_subject_id"
     t.integer  "user_id"
-    t.integer  "progress",        default: 0
-    t.integer  "status",          default: 0
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.integer  "progress",         default: 0
+    t.integer  "status",           default: 0
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.datetime "deleted_at"
+    t.string   "pull_request_url"
     t.index ["deleted_at"], name: "index_user_tasks_on_deleted_at", using: :btree
     t.index ["task_id"], name: "index_user_tasks_on_task_id", using: :btree
     t.index ["user_id"], name: "index_user_tasks_on_user_id", using: :btree

@@ -80,6 +80,7 @@ $(document).on("turbolinks:load", function() {
     }
 
     $('input[name="location_ids[]"]').click(function () {
+      $('input[name="check_visit"]').attr('checked', true);
       $('#form_total_trainee').submit();
     });
   });

@@ -2,12 +2,14 @@ en:
   tasks:
     description: Description
     update: "Update"
+    pull_request: "Pull request"
     fields:
       name: "Name"
       description: "Description"
     form:
       input_task_name: "Enter task name..."
       input_task_description: "Enter task description..."
+      input_task_pull_request: "Enter pull request..."
   user_tasks:
     statuses:
       in_progress: "In Progress"

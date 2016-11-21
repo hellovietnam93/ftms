@@ -15,11 +15,10 @@
     <div class="action text-center" hidden>
       <% if user_task.in_progress? %>
         <div class="action-status">
-          <%= link_to t("buttons.continue"), user_task_path(user_task,
-            status: "continue"),
-            method: :patch, remote: true,
-            data: {confirm: t("messages.continue.confirm")},
-            class: "btn btn-finished btn-continue-task" %>
+          <%= link_to "Add Pull", "#", data: {toggle: "modal",
+            target: "#user-pull-task-#{user_task.id}"},
+            title: t("subjects.task.update"),
+            class: "btn btn-finished btn-continue-task"%>
 
           <%= link_to t("buttons.finish"), user_task_path(user_task,
             status: "finished"),

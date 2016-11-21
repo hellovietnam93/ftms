@@ -4,9 +4,10 @@ class UserTasksController < ApplicationController
 
   def update
     new_status = params[:status]
-    @old_status = @user_task.status
+    pull_request = pull_request_url || @user_task.pull_request_url
     user_task_service = MailerServices::UserTaskService.new user_task: @user_task,
-      status: new_status
+      status: new_status, pull_request_url: pull_request
+    @old_status = @user_task.status
     if new_status == Settings.status.finished
       @user_task_history = user_task_service.perform
       if @user_task.update_attributes status: Settings.status.finished
@@ -16,7 +17,16 @@ class UserTasksController < ApplicationController
       end
     else
       if user_task_service.perform
-        flash.now[:success] = flash_message "updated"
+        @user_task.update_attributes pull_request_url: pull_request
+        room_id = @user_task.user_subject.course_subject.chatwork_room_id
+        trainer = current_user.trainer
+        send_chatwork = @user_task.send_message_chatwork users: [current_user, trainer],
+          message: pull_request, room_id: room_id
+        if send_chatwork
+          flash.now[:success] = flash_message "updated"
+        else
+          flass.now[:error] = flash_message "not_updated"
+        end
       else
         flash.now[:error] = flash_message "not_updated"
       end
@@ -46,5 +56,9 @@ class UserTasksController < ApplicationController
 
   def authorize_user_task
     authorize_with_multiple page_params.merge(record: @user_task), UserTaskPolicy
+  end
+
+  def pull_request_url
+    params.fetch(:user_task, {}).permit(:pull_request_url)[:pull_request_url]
   end
 end

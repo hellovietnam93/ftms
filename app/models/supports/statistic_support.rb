@@ -1,9 +1,21 @@
 class Supports::StatisticSupport
   def initialize args = {}
+    @check = args[:check]
     @location_ids = args[:location_ids] || load_locations.map(&:id)
+    @check_params_location = args[:location_ids]
     @stage_ids = args[:stage_ids] || load_stages.map(&:id)
     @start_date = args[:start_date] || Date.today.beginning_of_year
     @end_date = args[:end_date] || Date.today
+  end
+
+  def check
+    if @check.nil?
+      false
+    else
+      if @check_params_location.nil?
+        true
+      end
+    end
   end
 
   def load_locations
@@ -19,9 +31,8 @@ class Supports::StatisticSupport
   end
 
   def trainee_types
-    @trainee_types ||= if @location_ids.nil?
-      load_trainee_types.collect{|u| Hash[:name, u.name, :y, u.profiles.size]}
-        .delete_if{|p| p[:y] == 0}.sort_by{|u| u[:y]}.reverse
+    @trainee_types ||= if check
+      load_trainee_types.collect{|u| Hash[:name, u.name, :y, u.profiles.size]}.reverse.take(1)
     else
       temp = []
       load_locations.where(id: @location_ids).includes(profiles: :user_type).each do |location|

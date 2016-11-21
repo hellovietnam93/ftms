@@ -1,6 +1,7 @@
 class UserSubject < ApplicationRecord
   include PublicActivity::Model
   include LoadUser
+  include EstimateTime
   acts_as_paranoid
 
   ATTRIBUTES_PARAMS = [:start_date, :end_date]
@@ -26,7 +27,7 @@ class UserSubject < ApplicationRecord
 
   scope :load_by_course_subject, ->course_subject_ids, trainer_id do
     order_by_course_subject.joins(:trainee).where("course_subjects.id in (?)
-      AND user_subjects.status = ? AND users.trainer_id = ?", course_subject_ids,
+      AND user_subjects.status = ? AND trainees.trainer_id = ?", course_subject_ids,
       UserSubject.statuses[:progress], trainer_id)
   end
 
@@ -165,7 +166,10 @@ class UserSubject < ApplicationRecord
   end
 
   def plan_end_date
-    (course_subject.subject_during_time - 1).business_days.after Time.now
+    working_day = Profile.find_by(user_id: user_id).try :working_day
+    subject_time = course_subject.subject_during_time
+    estimate_time = working_day ? (subject_time*5/working_day.to_f).to_i : (subject_time - 1)
+    estimate_end_date estimate_time
   end
 
   private
@@ -207,7 +211,7 @@ class UserSubject < ApplicationRecord
         new_status = UserSubject.statuses.key args[:column]
         parameters = {old_status: old_status, new_status: new_status}
         create_activity key: activity_key, owner: args[:current_user],
-          recipient: user, parameters: parameters
+          recipient: trainee, parameters: parameters
         user_ids = [args[:current_user].id, user_id].uniq
 
         notification_key = args[:row] > args[:column] ? :change_status_down : :change_status_up

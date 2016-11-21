@@ -1,5 +1,8 @@
 <%= form_tag admin_statistics_path, remote: true, id: "form_total_trainee" do %>
   <%= hidden_field_tag :type, params[:type] %>
+  <div class="display-none">
+    <%= check_box_tag "check_visit" %>
+  </div>
   <% @statistics.load_locations.each do |location| %>
     <%= check_box_tag "location_ids[]", location.id, checked: true %>
     <%= location.name %>

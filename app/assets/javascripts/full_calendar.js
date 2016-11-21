@@ -1,4 +1,20 @@
 $(document).on('turbolinks:load', function() {
+  if ($('meta[name=current-user]').attr('id').length > 0) {
+    if (typeof localStorage.calendar_data === typeof undefined) {
+      $.ajax({
+        url: '/calendars.json',
+        type: 'json',
+        method: 'get',
+        complete: function (data) {
+          localStorage.setItem('calendar_data', JSON.stringify(data.responseJSON));
+        }
+      });
+
+    }
+  } else if (localStorage.calendar_data) {
+    localStorage.removeItem('calendar_data');
+  }
+
   $('#calendar').fullCalendar({
     theme: true,
     header: {
@@ -6,7 +22,7 @@ $(document).on('turbolinks:load', function() {
       center: 'title',
       right: 'month,agendaWeek,agendaDay,listMonth'
     },
-    height: 'parent',
+    height: 'auto',
     navLinks: true,
     editable: true,
     eventLimit: true,
@@ -23,17 +39,6 @@ $(document).on('turbolinks:load', function() {
       $('#loading').toggle(bool);
     }
   });
-  var can = '';
-
-  $.ajax({
-    url: '/calendars.json',
-    type: 'json',
-    method: 'get',
-    async: false,
-    complete: function (data) {
-      can = data.responseJSON;
-    }
-  });
 
   $('#tiny-calendar').fullCalendar({
     height: 'auto',
@@ -48,7 +53,7 @@ $(document).on('turbolinks:load', function() {
       var current = dateObj.getFullYear()+ '-' +
         (dateObj.getMonth() + 1 < 10 ? '0' : '') +(dateObj.getMonth() + 1) + '-' +
         (dateObj.getDate() < 10 ? '0':'') + dateObj.getDate();
-      $.each(can, function (i, v){
+      $.each(JSON.parse(localStorage.calendar_data), function (i, v){
         if (current === v.end) {
           cell.css('background', 'red');
         }
@@ -63,7 +68,7 @@ $(document).on('turbolinks:load', function() {
         (date2.getMonth() + 1 < 10 ? '0' : '') +(date2.getMonth() + 1) + '-' +
         (date2.getDate() < 10 ? '0' : '') + date2.getDate();
       var chil = '';
-      $.each(can, function (i, v){
+      $.each(JSON.parse(localStorage.calendar_data), function (i, v){
         if (selectDate === v.end) {
           chil += I18n.t("calendars.must_be_finished") + v.title + '<br/>';
         }

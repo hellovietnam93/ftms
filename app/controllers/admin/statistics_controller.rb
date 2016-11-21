@@ -24,6 +24,7 @@ class Admin::StatisticsController < ApplicationController
   private
   def load_statistic_view
     @statistics = Supports::StatisticSupport.new location_ids: params[:location_ids],
+      check: params[:check_visit],
       start_date: params[:start_date], end_date: params[:end_date],
       stage_ids: params[:stage_ids]
   end

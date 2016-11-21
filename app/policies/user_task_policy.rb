@@ -14,6 +14,6 @@ class UserTaskPolicy < ApplicationPolicy
   end
 
   def update?
-    @user = @record.user
+    @user = @record.trainee
   end
 end

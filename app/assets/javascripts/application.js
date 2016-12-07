@@ -189,6 +189,7 @@ function totalTraineeValue() {
     }
   });
 }
+
 $(document).on("turbolinks:load", function(){
 
   $('ul.tabs li').click(function(){

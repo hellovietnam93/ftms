@@ -29,11 +29,15 @@ class CourseSubject < ApplicationRecord
     reject_if: proc {|attributes| attributes["name"].blank?}
 
   scope :order_position, ->{rank :row_order}
-  scope :load_course_subjects_for_trainer, ->trainer_id do
-    joins(course: :user_courses).where("user_courses.user_id = ?
-      AND courses.status = ?", trainer_id, Course.statuses[:progress])
-      .group_by &:subject_id
-  end
+
+  scope :load_course_subjects_for_trainer, ->trainer_id{
+    where("id IN (?)",
+      UserSubject.load_user_subject_by_trainer(trainer_id)
+      .pluck(:course_subject_id)).select(:subject_name).group(:subject_name)
+  }
+  scope :by_subject_name, ->subject_name{
+    where("subject_name = ?", subject_name).pluck(:id)
+  }
 
   delegate :name, to: :course, prefix: true, allow_nil: true
   delegate :during_time, to: :subject, prefix: true, allow_nil: true

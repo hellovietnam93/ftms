@@ -28,11 +28,25 @@ class UserSubject < ApplicationRecord
   scope :sort_by_course_subject, ->{joins(:course_subject).order("course_subjects.order asc")}
   scope :order_by_course_subject , ->{joins(:course_subject).order "course_subjects.row_order"}
 
+  scope :load_current_progress, ->{where current_progress: true}
+
   scope :load_by_course_subject, ->course_subject_ids, trainer_id do
     order_by_course_subject.joins(:user).where("course_subjects.id in (?)
-      AND user_subjects.status = ? AND users.trainer_id = ?", course_subject_ids,
-      UserSubject.statuses[:progress], trainer_id)
+      AND user_subjects.status = ? AND users.trainer_id = ?
+      AND user_subjects.current_progress = ?", course_subject_ids,
+      UserSubject.statuses[:progress], trainer_id, true)
   end
+
+  scope :load_user_subject_by_trainer, -> trainer_id{
+    where "user_id in (?) AND current_progress = ? AND status = ?",
+      User.by_trainer(trainer_id).pluck(:id), true,
+      UserSubject.statuses[:progress]
+  }
+
+  scope :testing1, -> {
+    where "current_progress = ? AND status = ?", true,
+      UserSubject.statuses[:progress]
+  }
 
   accepts_nested_attributes_for :user_tasks
 

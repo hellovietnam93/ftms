@@ -83,17 +83,25 @@ class User < ApplicationRecord
   scope :by_location, ->location_id{
     joins(:profile).where("profiles.location_id = ?", location_id)
   }
+  scope :by_trainer_course, ->{
+    where("user_id IN (?)", TrainerCourse.pluck(:user_id))
+  }
   scope :created_between, ->start_date, end_date{where("DATE(created_at) >=
     ? AND DATE(created_at) <= ?", start_date, end_date)}
   scope :by_trainer, ->trainer_id{where trainer_id: trainer_id}
-  scope :free_trainees, -> do
-    where.not(id: joins(:user_subjects)
-      .where("user_subjects.status = ?", UserSubject.statuses[:progress])
-      .pluck(:id))
-  end
+  scope :free_trainees, -> {
+    where "users.id NOT IN (?)", UserSubject.load_current_progress
+      .pluck(:user_id)
+  }
+  scope :load_away_trainee, ->location_id, trainer_id{
+    joins(:profile).where("profiles.stage_id = 4
+      AND profiles.location_id = ? AND trainer_id = ?", location_id, trainer_id)
+  }
   scope :free_group, ->{where.not id: GroupUser.select(:user_id)}
   scope :free_and_in_group, ->group_id{where.not id: GroupUser
     .where.not(group_id: group_id).select(:user_id)}
+
+  scope :in_edu, -> {joins(:profile).where("profiles.stage_id = 3")}
 
   before_validation :set_password
 

@@ -1,0 +1,14 @@
+<% if (away_trainee = User.load_away_trainee location.id, trainer_id).any? %>
+  <div class="free-trainee">
+    <div class="subject">
+      <div class="subject-name away-trainee">
+        <%= image_tag "user.png", size: Settings.image_size_40 %>
+        <span class="title-name">Away trainee</span>
+      </div>
+      <div>
+        <%= render partial: "away_trainee",
+          collection: away_trainee, as: :trainee %>
+      </div>
+    </div>
+  </div>
+<% end %>

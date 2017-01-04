@@ -19,6 +19,7 @@
 
   <div class="structure-content">
     <%= render partial: "trainer",
-      collection: User.trainers.by_location(location.id), as: :trainer %>
+      collection: User.by_trainer_course
+        .by_location(location.id), as: :trainer %>
   </div>
 </div>

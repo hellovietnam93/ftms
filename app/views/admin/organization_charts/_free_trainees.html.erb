@@ -1,5 +1,5 @@
 <% if (free_trainees = Trainee.includes(:profile)
-  .by_trainer(trainer.id).free_trainees).any? %>
+  .by_trainer(trainer.id).in_edu.free_trainees).any? %>
   <div class="free-trainee">
     <div class="subject">
       <div class="subject-name">

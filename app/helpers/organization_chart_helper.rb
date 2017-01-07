@@ -8,6 +8,5 @@ module OrganizationChartHelper
         h[trainee.user_subjects.testing1.first.course_subject.subject_name] << trainee.id
       end
     end
-    binding.pry
   end
 end

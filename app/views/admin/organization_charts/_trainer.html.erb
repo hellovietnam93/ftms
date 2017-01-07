@@ -14,16 +14,11 @@
   </div>
 
   <div class="subject-structure">
-    <%= render "away", location: trainer.profile.location,
-      trainer_id: trainer.id %>
-    <% CourseSubject.load_course_subjects_for_trainer(trainer.id)
-      .each do |subject| %>
-      <%= render "course_subject",
-        subject: Subject.find_by(name: subject.subject_name),
-        course_subject_ids: CourseSubject.by_subject_name(subject.subject_name),
-        trainer_id: trainer.id %>
+    <%#= render "away", trainees: @support.away_trainees(location) %>
+    <% subjects.each do |subject, profiles| %>
+      <%= render "course_subject", subject: subject,
+        profiles: profiles unless subject == "free_trainees" %>
     <% end %>
-    <% temp = load_subject_by_trainee(User.by_trainer(5)) %>
-    <%= render "free_trainees", trainer: trainer %>
+    <%= render "free_trainees", profiles: subjects["free_trainees"] %>
   </div>
 </div>

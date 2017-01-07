@@ -18,8 +18,8 @@
   </div>
 
   <div class="structure-content">
-    <%= render partial: "trainer",
-      collection: User.by_trainer_course
-        .by_location(location.id), as: :trainer %>
+    <% @support.organization(location).each do |trainer, subjects| %>
+      <%= render "trainer", trainer: trainer, subjects: subjects %>
+    <% end %>
   </div>
 </div>

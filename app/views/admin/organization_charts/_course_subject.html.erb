@@ -8,7 +8,6 @@
   </div>
   <div>
     <%= render partial: "user_subject",
-      collection: UserSubject.includes(:user)
-        .load_by_course_subject(course_subject_ids, trainer_id), as: :user_subject %>
+      collection: profiles, as: :profile %>
   </div>
 </div>

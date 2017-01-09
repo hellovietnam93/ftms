@@ -1,13 +1,12 @@
-<div id="main">
+<div id="main" class="clearfix">
   <div id="content">
-    <div id="change_function">
+    <div id="<%= controller_name %>">
       <div class="table">
         <%= render "shared/datatables/allocate_function_header" %>
         <%= @supports.presenter(f).html_safe %>
       </div>
 
       <div class="pull-right" id="number-records">
-        <%= i18n_pluralize @role.functions.size, Settings.record %>
       </div>
 
       <div class="list-filters">

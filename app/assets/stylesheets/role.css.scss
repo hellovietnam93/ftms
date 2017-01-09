@@ -10,19 +10,14 @@
     min-height: 120px;
   }
 
-  #child,#parent, .fixedTitle, #table-sidebar {
+  #child, #parent, .fixedTitle, #table-sidebar {
     min-width: 355px;
     max-width: 355px
   }
 
-  .f-namespace {
-    top: 12% !important;
-    left: 8% !important;
-  }
-
-  .f-controller_name {
-    top: 12% !important;
-    left: 23% !important;
+  .filters {
+    top: 10% !important;
+    left: 21.5% !important;
   }
 
   input[type="checkbox"] {

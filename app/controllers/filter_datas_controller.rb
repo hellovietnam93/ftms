@@ -129,7 +129,7 @@ class FilterDatasController < ApplicationController
     when "controller_name"
       @key_field = :routes
       @value_field = :routes
-      @resources = load_function
+      @resources = Function.pluck(:model_class).uniq.compact.sort!
     when "category_name"
       @key_field = :category_name
       @value_field = :category_name

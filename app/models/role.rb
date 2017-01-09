@@ -1,8 +1,7 @@
 class Role < ApplicationRecord
   acts_as_paranoid
 
-  ATTRIBUTES_ROLE_PARAMS = [:name, role_functions_attributes: [
-    :role_id, :function_id, :_destroy]]
+  ATTRIBUTES_ROLE_PARAMS = [:name, function_ids: []]
 
   has_many :user_roles, dependent: :destroy
   has_many :users, through: :user_roles

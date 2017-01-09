@@ -2,19 +2,11 @@
   <div class="tbody">
     <div class="trow header">
       <div class="tcell stt">#</div>
-      <div class="tcell namespace">
-        <%= t "roles.namespace" %>
-        <%= link_to filter_datas_path(type: :namespace,
-          filter_type: :routes), remote: true, class: "open-select",
-          data: {name: "f-namespace"} do %>
-          <i class="fa ic ic-filter namespace"></i>
-        <% end %>
-      </div>
 
-      <div class="tcell routes title">
-        <%= t "routes" %>
+      <div class="tcell controller_name title">
+        <%= t "roles.controller_name" %>
         <%= link_to filter_datas_path(type: :controller_name,
-          filter_type: :routes), remote: true, class: "open-select",
+          filter_type: :courses), remote: true, class: "open-select",
           data: {name: "f-controller_name"} do %>
           <i class="fa ic ic-filter controller_name"></i>
         <% end %>
@@ -31,13 +23,15 @@
   <div id="table-header" class="scroll-table">
     <div class="tbody">
       <div class="trow header">
-        <% Settings.user_functions.each do |user_function| %>
-          <div class="tcell <%= user_function %>-user_function
-            title checked-function title">
-            <%= user_function %>
-            <input type="checkbox" id="checked_all_in_col">
+        <% Settings.functions.each do |function| %>
+          <div class="tcell <%= function %>-function title">
+            <%= function.capitalize %>
           </div>
         <% end %>
+        <div class="tcell checked-function title">
+          <input type="checkbox" id="checked_all">
+        </div>
+        <!-- <div class="tcell title blank"> -->
       </div>
     </div>
   </div>

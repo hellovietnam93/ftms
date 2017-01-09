@@ -19,6 +19,7 @@ class Admin::RolesController < ApplicationController
 
   def create
     @role = Role.new role_params
+    binding.pry
     if @role.save
       flash[:success] = flash_message "created"
       redirect_to admin_roles_path
@@ -34,7 +35,7 @@ class Admin::RolesController < ApplicationController
 
   def update
     if @role.update_attributes role_params
-      add_user_function
+      #add_user_function
       flash[:success] = flash_message "updated"
       redirect_to admin_roles_path
     else
